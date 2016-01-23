@@ -37,7 +37,11 @@ var App = {
                 'eventRender':     function(event, element) {
                     element = element.context;
                     element.setAttribute('data-toggle', 'popover');
-                    element.setAttribute('data-placement', 'right');
+                    if (event.start.format('dddd') !== 'Freitag' && event.start.format('dddd') !== 'Donnerstag') {
+                        element.setAttribute('data-placement', 'right');
+                    } else {
+                        element.setAttribute('data-placement', 'left');
+                    }
                     element.setAttribute('data-container', 'body');
                     element.setAttribute('data-content', event.description);
                 }

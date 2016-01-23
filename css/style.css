@@ -32,6 +32,10 @@ main{
     margin-top: 100px;
 }
 
+tr{
+    height: 40px;
+}
+
 .bootable{
     will-change: translate3d, opacity;
     opacity:     0;
@@ -51,7 +55,7 @@ main{
     width:       0;
 }
 
-.panel-heading{
+.filters{
     cursor: pointer;
 }
 
