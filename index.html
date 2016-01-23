@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>GibmScheduler</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet"/>
+    <link href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet"/>
+    <link href="bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">GIBM - Scheduler</a>
+            </div>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" onclick="App.clearCache();">Cache löschen</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <div class="panel panel-primary bootable">
+            <div class="filters panel-heading">
+                <h3 class="panel-title">Suche</h3>
+            </div>
+            <div class="panel-body scheduler-body">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="beruf" class="col-md-2 control-label">Beruf</label>
+                            <div class="col-md-10">
+                                <select id="beruf" class="form-control" disabled>
+                                    <option>Auswählen</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none">
+                            <label for="klasse" class="col-md-2 control-label">Klasse</label>
+                            <div class="col-md-10">
+                                <select id="klasse" class="form-control" disabled>
+                                    <option>Auswählen</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div id="calendar" class="panel panel-primary bootable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Kalender</h3>
+            </div>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="js/Scheduler.js"></script>
+    <script src="js/App.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
