@@ -12,10 +12,10 @@ var Scheduler = {
     },
     init:              function() {
         var $klasse = $('#klasse');
-        var $beruf = $('#beruf');
-        var berufe = localStorage.getItem('berufe');
+        var $beruf  = $('#beruf');
+        var berufe  = localStorage.getItem('berufe');
         if (berufe !== null && typeof berufe !== 'undefined') {
-            berufe     = JSON.parse(berufe);
+            berufe = JSON.parse(berufe);
             for (let beruf in berufe) {
                 //noinspection JSUnfilteredForInLoop,JSUnresolvedVariable
                 $beruf.append('<option value="' + berufe[beruf].beruf_id + '">' + berufe[beruf].beruf_name + '</option>');
@@ -35,11 +35,12 @@ var Scheduler = {
         }
         this.addEventListeners();
         this.restore();
+        App.boot();
     },
     restore:           function() {
         var selectedJob = localStorage.getItem('beruf');
         if (selectedJob !== null) {
-            var $beruf = $('#beruf');
+            var $beruf  = $('#beruf');
             var $klasse = $('#klasse');
             $beruf.val(selectedJob);
             $klasse.parent().parent().show();
@@ -48,15 +49,15 @@ var Scheduler = {
             if (selectedClass !== null) {
                 $klasse.val(selectedClass);
                 $klasse.removeAttr('disabled');
-                $('.panel-body').hide();
-                $('.panel-heading').addClass('closed');
+                $('.scheduler-body').hide();
+                $('.filters.panel-heading').addClass('closed');
+                $('#calendar-container').addClass('boot-start');
             } else {
                 $beruf.trigger('change');
             }
-
         }
     },
-    load:              function(type) {
+    load:              function(type, data, callback) {
         switch (type) {
             case this.types.jobs:
                 $.ajax(
@@ -121,10 +122,39 @@ var Scheduler = {
                     {
                         "url":     "http://home.gibm.ch/interfaces/133/tafel.php",
                         'data':    {
-                            'klasse_id': classId
+                            'klasse_id': classId,
+                            'woche':     data
                         },
-                        "success": function() {
-                            $('.panel-heading').trigger('click');
+                        'async':   true,
+                        "success": function(data) {
+                            var events = [];
+                            for (let event in data) {
+                                let obj = data[event];
+                                event   = {
+                                    'date':    obj.tafel_datum,
+                                    'weekday': obj.tafel_wochentag,
+                                    'from':    obj.tafel_von,
+                                    'until':   obj.tafel_bis,
+                                    'teacher': obj.tafel_lehrer,
+                                    'subject': obj.tafel_longfach,
+                                    'room':    obj.tafel_raum,
+                                    'comment': (obj.tafel_kommentar ? "<br><br>" + obj.tafel_kommentar : "")
+
+                                };
+
+                                events.push(
+                                    {
+                                        'title':       event.subject + "\n" + event.room,
+                                        'start':       event.date + 'T' + event.from,
+                                        'end':         event.date + 'T' + event.until,
+                                        'description': event.subject + "<br>" + event.teacher + "<br>" + event.room + event.comment,
+                                        'color':       '#FF5722'
+                                    }
+                                );
+                            }
+
+
+                            return callback(events);
                         }
                     }
                 );
@@ -144,6 +174,7 @@ var Scheduler = {
             } else {
                 localStorage.removeItem('beruf');
             }
+            $('#calendar-container').removeClass('boot');
             Scheduler.load(Scheduler.types.classes);
         });
         $('#klasse').on('change', function() {
@@ -152,8 +183,12 @@ var Scheduler = {
                 localStorage.setItem('klasse', selected.attr('value'));
             } else {
                 localStorage.removeItem('klasse');
+                $('#calendar-container').removeClass('boot');
             }
-            Scheduler.load(Scheduler.types.schedules);
+            $('.panel-heading').trigger('click');
+            setTimeout(function() {
+                $('#calendar-container').addClass('boot').addClass('booted');
+            }, 400);
         });
         $('.filters.panel-heading').on('click', function() {
             var that = this;

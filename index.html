@@ -6,14 +6,16 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
     <title>GibmScheduler</title>
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet"/>
+    <link href="css/material.css" rel="stylesheet"/>
     <link href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet"/>
     <link href="bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"/>
+    <link href="css/materialCalendar.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
@@ -32,7 +34,7 @@
         </div>
     </nav>
     <main class="container">
-        <div class="panel panel-primary bootable">
+        <div class="panel panel-primary bootable boot-start">
             <div class="filters panel-heading">
                 <h3 class="panel-title">Suche</h3>
             </div>
@@ -59,9 +61,23 @@
                 </form>
             </div>
         </div>
-        <div id="calendar" class="panel panel-primary bootable">
+        <div id="calendar-container" class="panel panel-primary bootable">
             <div class="panel-heading">
                 <h3 class="panel-title">Kalender</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="text-center col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
+                        <div class="btn-group btn-group-raised calendar-menu">
+                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('prev')"><i class="material-icons">arrow_back</i></button>
+                            <button class="btn btn-sm btn-default" onclick="$('#calendar').fullCalendar('today')"><i class="material-icons">today</i></button>
+                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('next')"><i class="material-icons">arrow_forward</i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="calendar">
+
+                </div>
             </div>
         </div>
     </main>
