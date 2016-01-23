@@ -4,4 +4,5 @@
 
 "use strict";
 
+// Initiate the Application.
 App.init();

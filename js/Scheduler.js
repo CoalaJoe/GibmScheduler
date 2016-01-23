@@ -4,16 +4,27 @@
 
 "use strict";
 
+/**
+ *
+ * @type {{types: {jobs: string, classes: string, schedules: string}, init: Scheduler.init, restore: Scheduler.restore, load: Scheduler.load, addEventListeners: Scheduler.addEventListeners}}
+ */
 var Scheduler = {
+    /**
+     * What types the Scheduler loads.
+     */
     types:             {
         "jobs":      "Berufe",
         "classes":   "Klassen",
         "schedules": "Stundenplan"
     },
+    /**
+     * Initialize function for the Scheduler
+     */
     init:              function() {
         var $klasse = $('#klasse');
         var $beruf  = $('#beruf');
         var berufe  = localStorage.getItem('berufe');
+        // If the jobs where loaded, get them from cache.
         if (berufe !== null && typeof berufe !== 'undefined') {
             berufe = JSON.parse(berufe);
             for (let beruf in berufe) {
@@ -23,6 +34,7 @@ var Scheduler = {
             $beruf.removeAttr('disabled');
 
             var klassen = localStorage.getItem('klassen');
+            // If the classes where loaded aswell, get them from cache.
             if (klassen !== null && typeof klassen !== 'undefined') {
                 klassen = JSON.parse(klassen);
                 for (let klasse in klassen) {
@@ -31,12 +43,16 @@ var Scheduler = {
                 }
             }
         } else {
+            // Load the jobs
             this.load(this.types.jobs);
         }
         this.addEventListeners();
         this.restore();
         App.boot();
     },
+    /**
+     * Restore selected job and class.
+     */
     restore:           function() {
         var selectedJob = localStorage.getItem('beruf');
         if (selectedJob !== null) {
@@ -57,9 +73,17 @@ var Scheduler = {
             }
         }
     },
+    /**
+     * This function loads the data from the GIBM Server.
+     *
+     * @param type string
+     * @param data string
+     * @param callback function
+     */
     load:              function(type, data, callback) {
         switch (type) {
             case this.types.jobs:
+                // Load and add jobs to the DOM
                 $.ajax(
                     {
                         "url":     "http://home.gibm.ch/interfaces/133/berufe.php",
@@ -77,6 +101,7 @@ var Scheduler = {
                 );
                 break;
             case this.types.classes:
+                // Load and add classes to the DOM
                 var jobId = $('#beruf').find('option:selected').attr('value');
                 if (typeof jobId === 'undefined') {
                     $('#klasse').parent().parent().slideUp();
@@ -113,6 +138,7 @@ var Scheduler = {
                 );
                 break;
             case this.types.schedules:
+                // Load and add schedules to the DOM
                 //noinspection JSJQueryEfficiency
                 var classId = $('#klasse').find('option:selected').attr('value');
                 if (typeof classId === 'undefined') {
@@ -130,6 +156,7 @@ var Scheduler = {
                             var events = [];
                             for (let event in data) {
                                 let obj = data[event];
+                                // Temporary create a object with simpler properties.
                                 event   = {
                                     'date':    obj.tafel_datum,
                                     'weekday': obj.tafel_wochentag,
@@ -154,17 +181,21 @@ var Scheduler = {
                                 );
                             }
 
-
+                            // This allows me to return a value outside of the $.ajax-scope.
                             return callback(events);
                         }
                     }
                 );
                 break;
             default:
+                // None of the constants where supplied
                 console.warn("Type: " + type + " is not in the type definition!");
                 break;
         }
     },
+    /**
+     * Adds the EventListeners to the DOM.
+     */
     addEventListeners: function() {
         $('#beruf').on('change', function() {
             var selected = $(this).find('option:selected');

@@ -39,6 +39,7 @@ tr{
 .bootable{
     will-change: translate3d, opacity;
     opacity:     0;
+    display:     none;
 }
 
 .booted:not(.boot){
@@ -46,13 +47,9 @@ tr{
 }
 
 .boot{
+    display:   block;
     animation: slideInUp 0.7s;
     opacity:   1;
-}
-
-.progress-bar{
-    will-change: width;
-    width:       0;
 }
 
 .filters{
