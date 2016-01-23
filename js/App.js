@@ -20,7 +20,7 @@ var App = {
         $calendar.fullCalendar(
             {
                 'lang':            'de',
-                'hiddenDays':      [0],
+                'hiddenDays':      [0, 6],
                 'defaultView':     'agendaWeek',
                 'timeFormat':      'H:mm',
                 'slotLabelFormat': 'H:mm',

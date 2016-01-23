@@ -136,6 +136,7 @@ var Scheduler = {
                                     'from':    obj.tafel_von,
                                     'until':   obj.tafel_bis,
                                     'teacher': obj.tafel_lehrer,
+                                    'subj':    obj.tafel_fach,
                                     'subject': obj.tafel_longfach,
                                     'room':    obj.tafel_raum,
                                     'comment': (obj.tafel_kommentar ? "<br><br>" + obj.tafel_kommentar : "")
@@ -144,7 +145,7 @@ var Scheduler = {
 
                                 events.push(
                                     {
-                                        'title':       event.subject + "\n" + event.room,
+                                        'title':       event.subj + "\n" + event.room,
                                         'start':       event.date + 'T' + event.from,
                                         'end':         event.date + 'T' + event.until,
                                         'description': event.subject + "<br>" + event.teacher + "<br>" + event.room + event.comment,
