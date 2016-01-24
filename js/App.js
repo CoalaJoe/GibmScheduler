@@ -109,5 +109,5 @@ var App = {
     configure: function() {}
 };
 
-// Starts application.
-App.init();
+// Variable for requirejs
+define(['Scheduler'],App);
