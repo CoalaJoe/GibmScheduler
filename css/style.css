@@ -37,9 +37,7 @@ tr{
 }
 
 .bootable{
-    will-change: translate3d, opacity;
     opacity:     0;
-    display:     none;
 }
 
 .booted:not(.boot){

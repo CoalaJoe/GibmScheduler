@@ -88,8 +88,26 @@
     <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
     <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
     <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="js/Scheduler.js"></script>
-    <script src="js/App.js"></script>
-    <script src="js/index.js"></script>
+    <div id="ecma6">
+
+    </div>
+    <script>
+        "use strict";
+
+        // build script tag. Because of firefox 43 and below don't support the let keyword, unless you add the type attribute. Which is not supported in other browsers.
+        var ecma6 = document.getElementById('ecma6');
+        var scheduler = document.createElement('script');
+        var app = document.createElement('script');
+        scheduler.src = "js/Scheduler.js";
+        app.src = "js/App.js";
+
+        if (/Firefox/i.test(navigator.userAgent)) {
+            scheduler.type = "application/javascript;version=1.7";
+            app.type = "application/javascript;version=1.7";
+        }
+
+        ecma6.appendChild(scheduler);
+        ecma6.appendChild(app);
+    </script>
 </body>
 </html>

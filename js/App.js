@@ -62,6 +62,7 @@ var App = {
                 }
             }
         );
+        // if (!$calendar.hasClass('boot')) {$calendar.addClass('hidden')} // TODO: Test this
         // Apply events.
         $calendar.fullCalendar('refetchEvents');
 
@@ -97,6 +98,8 @@ var App = {
             snack.content     = 'Der Zwischenspeicher wurde gelöscht. <a href="javascript:location.reload();">Neu laden</a>';
             snack.htmlAllowed = true;
             $.snackbar(snack);
+        } else {
+            location.reload();
         }
     },
 
@@ -106,3 +109,6 @@ var App = {
      */
     configure: function() {}
 };
+
+// Starts application.
+App.init();
