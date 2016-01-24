@@ -4,9 +4,13 @@
 
 "use strict";
 
+var scheduler = 'Scheduler';
+if (isSafari){
+    scheduler = 'Scheduler-compiled';
+}
 
 // Initiate the Application.
-requirejs(['Scheduler'], function(Scheduler){
+requirejs([scheduler], function(Scheduler){
     requirejs(['App'], function(App){
         App.init(); // Start application with dependencies
     });

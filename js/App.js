@@ -84,7 +84,8 @@ var App = {
      * Defines variables that contain information about the environment.
      */
     enivironment: {
-        snackable: false
+        snackable: false,
+        isSafari:   !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)
     },
 
     /**
@@ -110,4 +111,4 @@ var App = {
 };
 
 // Variable for requirejs
-define(['Scheduler'],App);
+define([scheduler], App);
