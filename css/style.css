@@ -36,8 +36,9 @@ tr{
     height: 40px;
 }
 
+
 .bootable{
-    opacity:     0;
+    opacity: 0;
 }
 
 .booted:not(.boot){

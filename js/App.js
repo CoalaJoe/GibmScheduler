@@ -62,7 +62,6 @@ var App = {
                 }
             }
         );
-        // if (!$calendar.hasClass('boot')) {$calendar.addClass('hidden')} // TODO: Test this
         // Apply events.
         $calendar.fullCalendar('refetchEvents');
 
