@@ -88,6 +88,7 @@ var Scheduler = {
                     {
                         "url":     "http://home.gibm.ch/interfaces/133/berufe.php",
                         "async":   true,
+                        "dataType": "jsonp",
                         "success": function(data) {
                             var $beruf = $('#beruf');
                             localStorage.setItem('berufe', JSON.stringify(data));
@@ -114,6 +115,7 @@ var Scheduler = {
                             "beruf_id": jobId
                         },
                         "async":      true,
+                        "dataType": "jsonp",
                         "beforeSend": function() {
                             var $klasse = $('#klasse');
                             $klasse.attr('disabled', 'disabled');
@@ -152,6 +154,7 @@ var Scheduler = {
                             'woche':     data
                         },
                         'async':   true,
+                        "dataType": "jsonp",
                         "success": function(data) {
                             var events = [];
                             for (let event in data) {
@@ -218,6 +221,7 @@ var Scheduler = {
                 $('#calendar-container').removeClass('boot');
             }
             $('.panel-heading').trigger('click');
+            $('#calendar').fullCalendar('today');
             setTimeout(function() {
                 $('#calendar-container').addClass('boot').addClass('booted');
             }, 400);
