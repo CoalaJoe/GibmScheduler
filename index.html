@@ -11,20 +11,20 @@
     <link href="bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet"/>
     <link href="css/materialCalendar.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
+    <link href="https://fezvrasta.github.io/snackbarjs/dist/snackbar.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">GIBM - Scheduler</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">GIBM - Scheduler</a>
             </div>
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="nav navbar-nav navbar-right">
@@ -39,7 +39,7 @@
                 <h3 class="panel-title">Suche</h3>
             </div>
             <div class="panel-body scheduler-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" onsubmit="return false;">
                     <fieldset>
                         <div class="form-group">
                             <label for="beruf" class="col-md-2 control-label">Beruf</label>
@@ -69,9 +69,15 @@
                 <div class="row">
                     <div class="text-center col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
                         <div class="btn-group btn-group-raised calendar-menu">
-                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('prev')"><i class="material-icons">arrow_back</i></button>
-                            <button class="btn btn-sm btn-default" onclick="$('#calendar').fullCalendar('today')"><i class="material-icons">today</i></button>
-                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('next')"><i class="material-icons">arrow_forward</i></button>
+                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('prev')">
+                                <i class="material-icons">arrow_back</i>
+                            </button>
+                            <button class="btn btn-sm btn-default" onclick="$('#calendar').fullCalendar('today')">
+                                <i class="material-icons">today</i>
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="$('#calendar').fullCalendar('next')">
+                                <i class="material-icons">arrow_forward</i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -85,7 +91,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
-    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="http://fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
     <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
     <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     <script>
@@ -94,7 +100,7 @@
 
         var require = {
             waitSeconds: 15,
-            urlArgs : "bust="+new Date().getTime() // removes caching. TODO: Remove this line in production environment
+            // urlArgs : "bust="+new Date().getTime() // removes caching for development.
         };
         if (/Firefox/i.test(navigator.userAgent)) {
             require.scriptType = "application/javascript;version=1.7"; // Forces firefox browser to run with ECMAScript6 support.
