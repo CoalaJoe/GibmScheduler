@@ -36,7 +36,7 @@
     <main class="container">
         <div class="panel panel-primary bootable boot-start">
             <div class="filters panel-heading">
-                <h3 class="panel-title">Suche</h3>
+                <h3 class="panel-title">Suche<small id="classHint"></small></h3>
             </div>
             <div class="panel-body scheduler-body">
                 <form class="form-horizontal" onsubmit="return false;">
@@ -100,7 +100,7 @@
 
         var require = {
             waitSeconds: 15,
-            // urlArgs : "bust="+new Date().getTime() // removes caching for development.
+            urlArgs : "bust="+new Date().getTime() // removes caching for development.
         };
         if (/Firefox/i.test(navigator.userAgent)) {
             require.scriptType = "application/javascript;version=1.7"; // Forces firefox browser to run with ECMAScript6 support.

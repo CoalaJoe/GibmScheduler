@@ -140,7 +140,8 @@ var Scheduler = {
             case this.types.schedules:
                 // Load and add schedules to the DOM
                 //noinspection JSJQueryEfficiency
-                var classId = $('#klasse').find('option:selected').attr('value');
+                var $selected = $('#klasse').find('option:selected');
+                var classId   = $selected.attr('value');
                 if (typeof classId === 'undefined') {
                     return;
                 }
@@ -153,6 +154,10 @@ var Scheduler = {
                         },
                         'async':   true,
                         "success": function(data) {
+                            var $classHint = $('#classHint');
+                            if ($classHint.text() === '') {
+                                $classHint.text(' - ' + $selected.attr('title'));
+                            }
                             var events = [];
                             for (let event in data) {
                                 let obj = data[event];
@@ -201,6 +206,7 @@ var Scheduler = {
             var selected = $(this).find('option:selected');
             localStorage.removeItem('klasse');
             localStorage.removeItem('klassen');
+            $('#classHint').text('');
             if (typeof selected.attr('value') !== 'undefined') {
                 localStorage.setItem('beruf', selected.attr('value'));
             } else {
@@ -213,8 +219,10 @@ var Scheduler = {
             var selected = $(this).find('option:selected');
             if (typeof selected.attr('value') !== 'undefined') {
                 localStorage.setItem('klasse', selected.attr('value'));
+                $('#classHint').text(' - ' + selected.attr('title'));
             } else {
                 localStorage.removeItem('klasse');
+                $('#classHint').text('');
                 $('#calendar-container').removeClass('boot');
             }
             $('.panel-heading').trigger('click');
